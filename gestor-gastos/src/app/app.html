@@ -1,0 +1,23 @@
+<div class="app">
+  <nav>
+    <button (click)="cambiarVista('dashboard')">Dashboard</button>
+    <button (click)="cambiarVista('lista')">Gastos</button>
+    <button (click)="cambiarVista('formulario')">Nuevo Gasto</button>
+    <button (click)="cambiarVista('categorias')">Categorías</button>
+  </nav>
+
+  <main>
+    @if (vistaActual === 'dashboard') {
+    }
+
+    @if (vistaActual === 'lista') {
+    }
+
+    @if (vistaActual === 'formulario') {
+    }
+
+    @if (vistaActual === 'categorias') {
+    }
+</main>
+
+</div>
