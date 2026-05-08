@@ -96,7 +96,7 @@ export class App implements OnInit {
   this.categorias = this.categorias.filter(categoria => categoria.id !== id);
   this.guardarDatos();
 }
-
+ 
 cambiarVista(vista: VistaActual) {
   this.vistaActual = vista;
 }
