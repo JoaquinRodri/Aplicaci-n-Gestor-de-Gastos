@@ -1,5 +1,6 @@
 import { Component, OnInit} from '@angular/core';
-
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 interface Gasto {
   id: number;
@@ -19,19 +20,32 @@ interface Categoria {
 
 type VistaActual = 'lista' | 'formulario' | 'categorias' | 'dashboard';
 
-
-
 @Component({
   selector: 'app-root',
+  standalone: true,
+  imports: [CommonModule,FormsModule],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
+
+
 export class App implements OnInit {
 
   vistaActual: VistaActual = 'dashboard';
 
+  gastoEditando: Gasto | null = null;
+
+formGasto = {
+  concepto: '',
+  descripcion: '',
+  importe: 0,
+  fecha: '',
+  categoriaId: 0,
+  notas: ''
+};
+
   gastos: Gasto[] = [
-    {id: 1, concepto: "Ropa", descripcion: "Ropa para verano", importe: 50.67, fecha: new Date('25-04-2026'), categoriaId: 3},
+    {id: 1, concepto: "Ropa", descripcion: "Ropa para verano", importe: 50.67, fecha: new Date('2026-04-25'), categoriaId: 3},
     {id: 2, concepto: "Comida y bebida", descripcion: "Gastos varios", importe: 10.25, fecha: new Date('22-04-2026'), categoriaId: 2},
     {id: 3, concepto: "Ahorros", descripcion: "He metido en la hucha dinero", importe: 100, fecha: new Date('29-04-2026'), categoriaId: 1}];
 
@@ -71,6 +85,68 @@ export class App implements OnInit {
     this.gastos.push(gasto);
     this.guardarDatos();
   }
+  guardarGasto() {
+
+  if (
+    !this.formGasto.concepto ||
+    !this.formGasto.descripcion ||
+    this.formGasto.importe <= 0 ||
+    !this.formGasto.fecha ||
+    this.formGasto.categoriaId === 0
+  ) {
+    alert('Completa todos los campos obligatorios');
+    return;
+  }
+
+  const gasto: Gasto = {
+    id: this.gastoEditando ? this.gastoEditando.id : 0,
+    concepto: this.formGasto.concepto,
+    descripcion: this.formGasto.descripcion,
+    importe: this.formGasto.importe,
+    fecha: this.formGasto.fecha ? new Date(this.formGasto.fecha) : new Date(),
+    categoriaId: this.formGasto.categoriaId,
+    notas: this.formGasto.notas
+  };
+
+  if (this.gastoEditando) {
+    this.editarGasto(gasto);
+  } else {
+    this.agregarGasto(gasto);
+  }
+
+  this.cancelarFormulario();
+  this.vistaActual = 'lista';
+}
+
+editarFormulario(gasto: Gasto) {
+
+  this.gastoEditando = gasto;
+
+  this.formGasto = {
+    concepto: gasto.concepto,
+    descripcion: gasto.descripcion,
+    importe: gasto.importe,
+    fecha: new Date(gasto.fecha).toISOString().split('T')[0],
+    categoriaId: gasto.categoriaId,
+    notas: gasto.notas || ''
+  };
+
+  this.vistaActual = 'formulario';
+}
+
+cancelarFormulario() {
+
+  this.gastoEditando = null;
+
+  this.formGasto = {
+    concepto: '',
+    descripcion: '',
+    importe: 0,
+    fecha: '',
+    categoriaId: 0,
+    notas: ''
+  };
+}
   
   editarGasto (gasto: Gasto){
     this.gastos = this.gastos.map(gastoActual => gastoActual.id === gasto.id ? gasto : gastoActual);

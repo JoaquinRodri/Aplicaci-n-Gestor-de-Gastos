@@ -14,6 +14,85 @@
     }
 
     @if (vistaActual === 'formulario') {
+      @if (vistaActual === 'formulario') {
+
+<div class="formulario-container">
+
+  <h2>
+    {{ gastoEditando ? 'Editar gasto' : 'Nuevo gasto' }}
+  </h2>
+
+  <form>
+
+    <input
+      type="text"
+      placeholder="Concepto"
+      [(ngModel)]="formGasto.concepto"
+      name="concepto"
+    >
+
+    <input
+      type="text"
+      placeholder="Descripción"
+      [(ngModel)]="formGasto.descripcion"
+      name="descripcion"
+    >
+
+    <input
+      type="number"
+      placeholder="Importe"
+      [(ngModel)]="formGasto.importe"
+      name="importe"
+    >
+
+    <input
+      type="date"
+      [(ngModel)]="formGasto.fecha"
+      name="fecha"
+    >
+
+    <select
+      [(ngModel)]="formGasto.categoriaId"
+      name="categoria"
+    >
+
+      <option [value]="0">
+        Selecciona categoría
+      </option>
+
+      @for (categoria of categorias; track categoria.id) {
+
+        <option [value]="categoria.id">
+          {{ categoria.nombre }}
+        </option>
+
+      }
+
+    </select>
+
+    <textarea
+      placeholder="Notas"
+      [(ngModel)]="formGasto.notas"
+      name="notas"
+    ></textarea>
+
+    <div class="botones-formulario">
+
+      <button type="button" (click)="guardarGasto()">
+        Guardar
+      </button>
+
+      <button type="button" (click)="cancelarFormulario()">
+        Cancelar
+      </button>
+
+    </div>
+
+  </form>
+
+</div>
+
+}
     }
 
     @if (vistaActual === 'categorias') {

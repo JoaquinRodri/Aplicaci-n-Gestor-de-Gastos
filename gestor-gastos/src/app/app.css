@@ -34,3 +34,80 @@ nav button:hover {
 main {
   padding: 2rem;
 }
+
+.formulario-container {
+  max-width: 520px;
+  margin: 30px auto;
+  background-color: white;
+  padding: 25px;
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.formulario-container h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #2c3e50;
+}
+
+.formulario-container form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.formulario-container input,
+.formulario-container select,
+.formulario-container textarea {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-family: Arial, sans-serif;
+  transition: border 0.2s ease;
+}
+
+.formulario-container input:focus,
+.formulario-container select:focus,
+.formulario-container textarea:focus {
+  border-color: #2c3e50;
+  outline: none;
+}
+
+.formulario-container textarea {
+  min-height: 80px;
+  resize: vertical;
+}
+
+.botones-formulario {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.botones-formulario button {
+  flex: 1;
+  padding: 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.2s;
+}
+
+.botones-formulario button:first-child {
+  background-color: #2c3e50;
+  color: white;
+}
+
+.botones-formulario button:first-child:hover {
+  background-color: #1a242f;
+}
+
+.botones-formulario button:last-child {
+  background-color: #ecf0f1;
+  color: #2c3e50;
+}
+
+.botones-formulario button:last-child:hover {
+  background-color: #dfe6e9;
+}
