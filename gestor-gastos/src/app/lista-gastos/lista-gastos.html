@@ -1,1 +1,139 @@
-<p>lista-gastos works!</p>
+<section class="lista-gastos" aria-labelledby="titulo-listado-gastos">
+
+  <header class="lista-gastos__cabecera">
+    <h2 id="titulo-listado-gastos">Listado de gastos</h2>
+  </header>
+
+  <!-- Buscador enlazado con [(ngModel)] -->
+  <form class="buscador-gastos" role="search" (submit)="$event.preventDefault()">
+    <label for="buscadorGastos">Buscar gasto</label>
+
+    <input
+      id="buscadorGastos"
+      name="buscadorGastos"
+      type="search"
+      placeholder="Buscar por concepto o descripción"
+      [(ngModel)]="textoFiltro"
+    >
+  </form>
+
+  <table class="tabla-gastos">
+    <caption>
+      Tabla con el listado de gastos registrados
+    </caption>
+
+    <thead>
+      <tr>
+        <th scope="col">Concepto</th>
+        <th scope="col">Descripción</th>
+        <th scope="col">Importe</th>
+        <th scope="col">Fecha</th>
+        <th scope="col">Categoría</th>
+        <th scope="col">Acciones</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      @for (gasto of gastos; track gasto.id) {
+        <tr>
+          <td>
+            <button
+              type="button"
+              class="enlace-gasto"
+              (click)="irADetalle(gasto.id)"
+            >
+              {{ gasto.concepto }}
+            </button>
+          </td>
+
+          <td>{{ gasto.descripcion }}</td>
+
+          <td>
+            <strong>
+              {{ gasto.importe | currency:'EUR':'symbol':'1.2-2' }}
+            </strong>
+          </td>
+
+          <td>
+            <time [attr.datetime]="gasto.fecha">
+              {{ gasto.fecha | date:'dd/MM/yyyy' }}
+            </time>
+          </td>
+
+          <td>
+            <span
+              class="badge"
+              [style.background]="colorCategoria(gasto.categoriaId)"
+            >
+              {{ nombreCategoria(gasto.categoriaId) }}
+            </span>
+          </td>
+
+          <td>
+            <button
+              type="button"
+              class="btn-editar"
+              (click)="irAEditar(gasto.id)"
+            >
+              Editar
+            </button>
+
+            <button
+              type="button"
+              class="btn-borrar"
+              (click)="abrirModalEliminar(gasto.id)"
+            >
+              Borrar
+            </button>
+          </td>
+        </tr>
+      }
+
+      @if (gastos.length === 0) {
+        <tr>
+          <td colspan="6">
+            No hay gastos que coincidan
+          </td>
+        </tr>
+      }
+    </tbody>
+  </table>
+
+  @if (mostrarModalEliminar) {
+  <section
+    class="modal-fondo"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="titulo-modal-eliminar"
+  >
+    <article class="modal-contenido">
+      <header class="modal-cabecera">
+        <h3 id="titulo-modal-eliminar">Eliminar gasto</h3>
+      </header>
+
+      <p>
+        ¿Seguro que quieres eliminar este gasto? Esta acción no se puede deshacer.
+      </p>
+
+      <footer class="modal-acciones">
+        <button
+          type="button"
+          class="btn-cancelar"
+          (click)="cancelarEliminacion()"
+        >
+          Cancelar
+        </button>
+
+        <button
+          type="button"
+          class="btn-confirmar-borrado"
+          (click)="confirmarEliminacion()"
+        >
+          Sí, eliminar
+        </button>
+      </footer>
+    </article>
+  </section>
+}
+
+</section>

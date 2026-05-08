@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(Get-ChildItem -Path \"E:\\\\Aplicaci-n-Gestor-de-Gastos\\\\gestor-gastos\" -Recurse -Directory -Name)",
+      "Bash(Select-Object -First 30)"
+    ]
+  }
+}
