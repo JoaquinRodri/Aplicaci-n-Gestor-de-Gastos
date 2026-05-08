@@ -1,6 +1,4 @@
-import { ArrayType } from '@angular/compiler';
-import { Component, signal } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Component, OnInit} from '@angular/core';
 
 
 interface Gasto {
@@ -25,12 +23,10 @@ type VistaActual = 'lista' | 'formulario' | 'categorias' | 'dashboard';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
-export class App {
-  protected readonly title = signal('gestor-gastos');
+export class App implements OnInit {
 
   vistaActual: VistaActual = 'dashboard';
 
@@ -44,5 +40,65 @@ export class App {
     {id:2, nombre: "Ocio", color:"#4ECDC4"},
     {id:3, nombre: "Ropa", color:"#45B7D1"}];
 
+
+  guardarDatos() {
+    localStorage.setItem('gastos', JSON.stringify(this.gastos));
+    localStorage.setItem('categorias', JSON.stringify(this.categorias));
+  }
+
+  cargarDatos() {
+    const gastos = localStorage.getItem('gastos');
+    const categorias = localStorage.getItem('categorias');
+    
+    if (gastos) this.gastos = JSON.parse(gastos);
+    if (categorias) this.categorias = JSON.parse(categorias);
+  }
+
+
+
+  ngOnInit(): void {
+    this.cargarDatos();
+  }
+
+
+  eliminarGasto (id: number) {
+    this.gastos = this.gastos.filter(gasto => gasto.id !== id);
+    this.guardarDatos();
+  }
+
+  agregarGasto(gasto: Gasto) {
+    gasto.id = Math.max(...this.gastos.map(gasto => gasto.id), 0) + 1;
+    this.gastos.push(gasto);
+    this.guardarDatos();
+  }
   
+  editarGasto (gasto: Gasto){
+    this.gastos = this.gastos.map(gastoActual => gastoActual.id === gasto.id ? gasto : gastoActual);
+    this.guardarDatos();
+  }
+
+  agregarCategoria(categoria: Categoria) {
+    categoria.id = Math.max(...this.categorias.map(categoria => categoria.id), 0) + 1;
+    this.categorias.push(categoria);
+    this.guardarDatos();
+  }
+
+  editarCategoria (categoria: Categoria){
+    this.categorias = this.categorias.map(categoriaActual => categoriaActual.id === categoria.id ? categoria : categoriaActual);
+    this.guardarDatos();
+  }
+
+  eliminarCategoria(id: number) {
+  if (this.gastos.some(g => g.categoriaId === id)) {
+    alert('No puedes borrar una categoría con gastos asociados');
+    return;
+  }
+  this.categorias = this.categorias.filter(categoria => categoria.id !== id);
+  this.guardarDatos();
+}
+
+cambiarVista(vista: VistaActual) {
+  this.vistaActual = vista;
+}
+
 }
