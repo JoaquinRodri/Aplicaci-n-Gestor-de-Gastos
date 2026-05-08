@@ -7,6 +7,7 @@
   </nav>
 
   <main>
+
     @if (vistaActual === 'dashboard') {
     <div class="dashboard">
       <h2>Dashboard</h2>
@@ -26,16 +27,67 @@
       </div>
     </div>
   }
+      <h2>Dashboard</h2>
     }
 
     @if (vistaActual === 'lista') {
+
+      <div class="listado-gastos">
+
+        <h2>Listado de gastos</h2>
+
+        <input type="text"
+               placeholder="Buscar por descripción o categoría"
+               [(ngModel)]="textoFiltro">
+
+        <table>
+          <thead>
+            <tr>
+              <th>Concepto</th>
+              <th>Descripcion</th>
+              <th>Importe</th>
+              <th>Fecha</th>
+              <th>Categoria</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+
+          <tbody>
+  @for (gasto of obtenerGastos(textoFiltro); track $index) {
+    <tr>
+      <td>{{ gasto.concepto }}</td>
+      <td>{{ gasto.descripcion }}</td>
+      <td>{{ gasto.importe }} €</td>
+      <td>{{ gasto.fecha | date:'dd/MM/yyyy' }}</td>
+      <td>{{ gasto.categoriaId }}</td>
+
+      <td>
+        <button class="btn-editar" (click)="editarGasto(gasto)">
+          Editar
+        </button>
+
+        <button class="btn-borrar" (click)="eliminarGasto(gasto.id)">
+          Borrar
+        </button>
+      </td>
+    </tr>
+  }
+</tbody>
+
+
+        </table>
+
+      </div>
+
     }
 
     @if (vistaActual === 'formulario') {
+      <h2>Formulario</h2>
     }
 
     @if (vistaActual === 'categorias') {
+      <h2>Categorías</h2>
     }
-</main>
 
+  </main>
 </div>
