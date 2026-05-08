@@ -8,6 +8,24 @@
 
   <main>
     @if (vistaActual === 'dashboard') {
+    <div class="dashboard">
+      <h2>Dashboard</h2>
+      <div class="dashboard-cards">
+        <div class="dashboard-card">
+          <span class="card-label">Total gastado</span>
+          <span class="card-value">{{ totalGastado.toFixed(2) }} €</span>
+        </div>
+        <div class="dashboard-card">
+          <span class="card-label">Número de gastos</span>
+          <span class="card-value">{{ numeroGastos }}</span>
+        </div>
+        <div class="dashboard-card">
+          <span class="card-label">Categoría con más gasto</span>
+          <span class="card-value">{{ categoriaConMasGasto }}</span>
+        </div>
+      </div>
+    </div>
+  }
     }
 
     @if (vistaActual === 'lista') {

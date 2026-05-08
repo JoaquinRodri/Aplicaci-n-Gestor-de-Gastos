@@ -100,5 +100,21 @@ export class App implements OnInit {
 cambiarVista(vista: VistaActual) {
   this.vistaActual = vista;
 }
+ get totalGastado(): number {
+    return this.gastos.reduce((sum, g) => sum + g.importe, 0);
+  }
 
+  get numeroGastos(): number {
+    return this.gastos.length;
+  }
+
+  get categoriaConMasGasto(): string {
+    if (this.gastos.length === 0) return 'Sin gastos';
+    const totales = this.categorias.map(cat => ({
+      nombre: cat.nombre,
+      total: this.gastos.filter(g => g.categoriaId === cat.id).reduce((sum, g) => sum + g.importe, 0)
+    }));
+    const top = totales.reduce((max, cat) => cat.total > max.total ? cat : max);
+    return top.total > 0 ? top.nombre : 'Sin gastos';
+  }
 }
