@@ -1,1 +1,100 @@
-<p>categorias works!</p>
+<div class="formulario">
+
+  <!-- El titulo cambia segun si es edicion o creacion -->
+  <h2>
+    {{ categoriaEditando ? 'Editar categoria' : 'Nueva categoria' }}
+  </h2>
+
+  <div class="campo">
+
+    <label>Nombre *</label>
+
+    <input
+      type="text"
+      [(ngModel)]="form.nombre"
+      placeholder="Ej: Comida"
+    >
+
+  </div>
+
+  <div class="campo">
+
+    <label>Color *</label>
+
+    <input
+      type="color"
+      [(ngModel)]="form.color"
+    >
+
+  </div>
+
+  <div class="botones">
+
+    <button
+      class="btn-guardar"
+      (click)="guardar()"
+    >
+      {{ categoriaEditando ? 'Guardar cambios' : 'Anadir categoria' }}
+    </button>
+
+    <button
+      class="btn-cancelar"
+      (click)="cancelar()"
+    >
+      Cancelar
+    </button>
+
+  </div>
+
+</div>
+
+<div class="cabecera">
+
+  <h2>Lista de categorias</h2>
+
+  <button (click)="abrirFormulario()">
+    Nueva categoria
+  </button>
+
+</div>
+
+<div class="lista-categorias">
+
+  @for (categoria of categorias; track categoria.id) {
+
+    <div class="tarjeta-categoria">
+
+      <div
+        class="circulo-color"
+        [style.background]="categoria.color"
+      ></div>
+
+      <span class="nombre-categoria">
+        {{ categoria.nombre }}
+      </span>
+
+      <div class="acciones">
+
+        <button (click)="editarCategoria(categoria)">
+          Editar
+        </button>
+
+        <button (click)="eliminar(categoria.id)">
+          Borrar
+        </button>
+
+      </div>
+
+    </div>
+
+  }
+
+</div>
+
+@if (categorias.length === 0) {
+
+  <p class="sin-categorias">
+    No hay categorias creadas.
+  </p>
+
+}
