@@ -1,0 +1,129 @@
+.formulario {
+  max-width: 600px;
+  margin: 20px auto;
+}
+
+h2 {
+  color: #2c3e50;
+  margin-bottom: 1.5rem;
+}
+
+.campo {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+}
+
+label {
+  font-weight: bold;
+  margin-bottom: 4px;
+  color: #555;
+}
+
+input {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+.botones {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.btn-guardar {
+  background: #27ae60;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.btn-cancelar {
+  background: #95a5a6;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.cabecera {
+  max-width: 600px;
+  margin: 30px auto 20px auto;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.cabecera button {
+  background: #3498db;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.lista-categorias {
+  max-width: 600px;
+  margin: auto;
+
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.tarjeta-categoria {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+
+  padding: 15px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
+
+.circulo-color {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+}
+
+.nombre-categoria {
+  font-weight: bold;
+}
+
+.acciones {
+  margin-left: auto;
+
+  display: flex;
+  gap: 10px;
+}
+
+.acciones button {
+  padding: 8px 14px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.acciones button:first-child {
+  background: #f39c12;
+  color: white;
+}
+
+.acciones button:last-child {
+  background: #e74c3c;
+  color: white;
+}
+
+.sin-categorias {
+  text-align: center;
+  margin-top: 20px;
+  color: #777;
+}

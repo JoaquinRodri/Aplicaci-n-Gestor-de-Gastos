@@ -1,0 +1,46 @@
+<div class="formulario">
+  <!-- El titulo cambia segun si es edicion o creacion -->
+  <h2>{{ modoEdicion ? 'Editar gasto' : 'Nuevo gasto' }}</h2>
+
+  <div class="campo">
+    <label>Concepto *</label>
+    <input type="text" [(ngModel)]="gasto.concepto" placeholder="Ej: Compra">
+  </div>
+<div class="campo">
+    <label>Descripcion</label>
+    <input type="text" [(ngModel)]="gasto.descripcion" placeholder="Detalle">
+  </div>
+
+  <div class="campo">
+    <label>Importe (euros) *</label>
+    <input type="number" [(ngModel)]="gasto.importe" min="0" step="0.01">
+  </div>
+
+  <div class="campo">
+    <label>Fecha *</label>
+    <input type="date" [(ngModel)]="fechaString">
+  </div>
+
+  <div class="campo">
+    <label>Categoria *</label>
+    <select [(ngModel)]="gasto.categoriaId">
+      <option [value]="0" disabled>Selecciona una categoria</option>
+      <!-- @for recorre las categorias para mostrarlas en el select -->
+      @for (cat of categorias; track cat.id) {
+        <option [value]="cat.id">{{ cat.nombre }}</option>
+      }
+    </select>
+  </div>
+
+  <div class="campo">
+    <label>Notas</label>
+    <textarea [(ngModel)]="gasto.notas" rows="3" placeholder="Notas..."></textarea>
+  </div>
+
+  <div class="botones">
+    <button class="btn-guardar" (click)="guardar()">
+      {{ modoEdicion ? 'Guardar cambios' : 'Anadir gasto' }}
+    </button>
+    <button class="btn-cancelar" (click)="cancelar()">Cancelar</button>
+  </div>
+</div>
