@@ -6,11 +6,11 @@ export class GastoService {
 
   gastos: Gasto[] = [
     { id: 1, concepto: 'Ropa', descripcion: 'Ropa de verano',
-      importe: 50.67, fecha: new Date('2026-04-25'), categoriaId: 3 },
+      importe: 50.67, fecha: new Date('2026-04-25'), categoriaId: 3 , usuarioId: 0},
     { id: 2, concepto: 'Comida', descripcion: 'Gastos varios',
-      importe: 10.25, fecha: new Date('2026-04-22'), categoriaId: 2 },
+      importe: 10.25, fecha: new Date('2026-04-22'), categoriaId: 2, usuarioId: 0},
     { id: 3, concepto: 'Ahorros', descripcion: 'Dinero en la hucha',
-      importe: 100, fecha: new Date('2026-04-29'), categoriaId: 1 }
+      importe: 100, fecha: new Date('2026-04-29'), categoriaId: 1, usuarioId: 0}
   ];
 
   categorias: Categoria[] = [
