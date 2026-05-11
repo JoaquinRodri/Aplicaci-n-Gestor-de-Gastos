@@ -6,7 +6,7 @@ import { FormsModule } from '@angular/forms';
 
 import { GastoService } from '../services/gasto';
 
-import { AuthService } from '../services/auth';
+import { Auth } from '../services/auth';
 
 import { Categoria } from '../models/gasto.model';
 
@@ -20,7 +20,7 @@ export class CategoriasComponent {
 
   gastoService = inject(GastoService);
 
-  authService = inject(AuthService);
+  authService = inject(Auth);
 
   mostrarFormulario = false;
 
