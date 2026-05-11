@@ -1,60 +1,66 @@
-<div class="formulario">
+@if (esAdmin) {
 
-  <!-- El titulo cambia segun si es edicion o creacion -->
-  <h2>
-    {{ categoriaEditando ? 'Editar categoria' : 'Nueva categoria' }}
-  </h2>
+  <div class="formulario">
 
-  <div class="campo">
+    <h2>
+      {{ categoriaEditando ? 'Editar categoria' : 'Nueva categoria' }}
+    </h2>
 
-    <label>Nombre *</label>
+    <div class="campo">
 
-    <input
-      type="text"
-      [(ngModel)]="form.nombre"
-      placeholder="Ej: Comida"
-    >
+      <label>Nombre *</label>
+
+      <input
+        type="text"
+        [(ngModel)]="form.nombre"
+        placeholder="Ej: Comida"
+      >
+
+    </div>
+
+    <div class="campo">
+
+      <label>Color *</label>
+
+      <input
+        type="color"
+        [(ngModel)]="form.color"
+      >
+
+    </div>
+
+    <div class="botones">
+
+      <button
+        class="btn-guardar"
+        (click)="guardar()"
+      >
+        {{ categoriaEditando ? 'Guardar cambios' : 'Anadir categoria' }}
+      </button>
+
+      <button
+        class="btn-cancelar"
+        (click)="cancelar()"
+      >
+        Cancelar
+      </button>
+
+    </div>
 
   </div>
-
-  <div class="campo">
-
-    <label>Color *</label>
-
-    <input
-      type="color"
-      [(ngModel)]="form.color"
-    >
-
-  </div>
-
-  <div class="botones">
-
-    <button
-      class="btn-guardar"
-      (click)="guardar()"
-    >
-      {{ categoriaEditando ? 'Guardar cambios' : 'Anadir categoria' }}
-    </button>
-
-    <button
-      class="btn-cancelar"
-      (click)="cancelar()"
-    >
-      Cancelar
-    </button>
-
-  </div>
-
-</div>
+}
 
 <div class="cabecera">
 
   <h2>Lista de categorias</h2>
 
-  <button (click)="abrirFormulario()">
-    Nueva categoria
-  </button>
+  @if (esAdmin) {
+
+    <button (click)="abrirFormulario()">
+      Nueva categoria
+    </button>
+
+  }
 
 </div>
 
@@ -73,17 +79,21 @@
         {{ categoria.nombre }}
       </span>
 
-      <div class="acciones">
+      @if (esAdmin) {
 
-        <button (click)="editarCategoria(categoria)">
-          Editar
-        </button>
+        <div class="acciones">
 
-        <button (click)="eliminar(categoria.id)">
-          Borrar
-        </button>
+          <button (click)="editarCategoria(categoria)">
+            Editar
+          </button>
 
-      </div>
+          <button (click)="eliminar(categoria.id)">
+            Borrar
+          </button>
+
+        </div>
+
+      }
 
     </div>
 
