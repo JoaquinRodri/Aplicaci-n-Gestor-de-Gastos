@@ -1,6 +1,9 @@
   import { Routes } from '@angular/router';
-
+  import { LoginComponent } from './login/login';
   export const routes: Routes = [
+    { path: 'login', component: LoginComponent },
+    { path: 'registro', component: LoginComponent },
+
     { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
     { path: 'dashboard',
       loadComponent: () => import('./dashboard/dashboard').then(m => m.DashboardComponent) },

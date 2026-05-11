@@ -26,7 +26,8 @@ export class FormularioGastoComponent implements OnInit {
     descripcion: '',
     importe: 0,
     fecha: new Date(),
-    categoriaId: 0
+    categoriaId: 0,
+    usuarioId: 0
   };
 
   ngOnInit() {
