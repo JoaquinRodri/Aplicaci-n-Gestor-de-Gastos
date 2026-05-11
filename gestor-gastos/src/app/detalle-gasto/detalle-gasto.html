@@ -1,0 +1,42 @@
+ <div class="detalle">
+    @if (gasto) {
+      <div class="detalle-card">
+        <div class="detalle-header">
+          <h2>{{ gasto.concepto }}</h2>
+          <span class="badge" [style.background]="colorCategoria(gasto.categoriaId)">
+            {{ nombreCategoria(gasto.categoriaId) }}
+          </span>
+        </div>
+
+        <div class="detalle-campos">
+          <div class="campo-fila">
+            <span class="campo-etiqueta">Descripcion</span>
+            <span class="campo-valor">{{ gasto.descripcion }}</span>
+          </div>
+          <div class="campo-fila">
+            <span class="campo-etiqueta">Importe</span>
+            <span class="campo-valor importe">{{ gasto.importe | currency:'EUR':'symbol':'1.2-2' }}</span>
+          </div>
+          <div class="campo-fila">
+            <span class="campo-etiqueta">Fecha</span>
+            <span class="campo-valor">{{ gasto.fecha | date:'dd/MM/yyyy' }}</span>
+          </div>
+          @if (gasto.notas) {
+            <div class="campo-fila">
+              <span class="campo-etiqueta">Notas</span>
+              <span class="campo-valor">{{ gasto.notas }}</span>
+            </div>
+          }
+        </div>
+
+        <div class="detalle-botones">
+          <button class="btn-volver" (click)="volver()">Volver</button>
+          <button class="btn-editar" (click)="editar()">Editar</button>
+          <button class="btn-borrar" (click)="eliminar()">Eliminar</button>
+        </div>
+      </div>
+    } @else {
+      <p>Gasto no encontrado.</p>
+      <button class="btn-volver" (click)="volver()">Volver a la lista</button>
+    }
+  </div>
