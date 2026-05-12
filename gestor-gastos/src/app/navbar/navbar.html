@@ -5,7 +5,9 @@
   <a routerLink="/categorias" routerLinkActive="active">Categorias</a>
 
   <div class="user-info">
+    @if (authService.estaLogueado()) {
     <span>{{ authService.usuarioActivo?.nombre }}</span>
     <button (click)="logout()">Cerrar sesión</button>
+    }
   </div>
 </nav>

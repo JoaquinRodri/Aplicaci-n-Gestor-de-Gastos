@@ -14,6 +14,7 @@
     <form [formGroup]="formularioLogin">
 
       <!-- Nombre -->
+       <div class="campo">
       <input
         type="text"
         placeholder="Nombre de usuario"
@@ -31,8 +32,9 @@
       @if (formularioLogin.get('nombre')?.errors?.['maxlength'] && formularioLogin.get('nombre')?.touched) {
         <p class="error">{{ ERRORES.nombre.maximo }}</p>
       }
-
+      </div>
       <!-- Password -->
+       <div  class="campo">
       <input
         type="password"
         placeholder="Contraseña"
@@ -46,6 +48,7 @@
       @if (formularioLogin.get('password')?.errors?.['pattern'] && formularioLogin.get('password')?.touched) {
         <p class="error">{{ ERRORES.password.patron }}</p>
       }
+      </div>
 
       <!-- Error general -->
       @if (mensajeError) {
