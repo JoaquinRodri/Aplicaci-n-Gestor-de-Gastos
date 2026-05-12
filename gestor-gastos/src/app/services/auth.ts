@@ -21,6 +21,8 @@ export class Auth {
     rol: 'admin' as 'admin'
   };
 
+  readonly passwordPattern = /^(?=.*[A-Z])(?=.*\d).{6,20}$/;
+
   login(nombre:string, password:string): boolean{
     // comprueba que el usuario es admin
     if (nombre === this.usuarioAdmin.nombre && 

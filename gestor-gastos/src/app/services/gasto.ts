@@ -1,8 +1,10 @@
-import { Injectable } from '@angular/core';
-import { Gasto, Categoria } from '../models/gasto.model';
+import { Injectable, inject } from '@angular/core';                       
+  import { Gasto, Categoria } from '../models/gasto.model';
+  import { Auth } from './auth';
 
 @Injectable({ providedIn: 'root' })
 export class GastoService {
+authService = inject(Auth);
 
   gastos: Gasto[] = [
     { id: 1, concepto: 'Ropa', descripcion: 'Ropa de verano',
@@ -32,6 +34,7 @@ export class GastoService {
   }
 
   agregarGasto(gasto: Gasto) {
+    gasto.usuarioId = this.authService.usuarioActivo!.id;
     gasto.id = Math.max(...this.gastos.map(g => g.id), 0) + 1;
     this.gastos.push(gasto);
     this.guardarDatos();
@@ -48,9 +51,14 @@ export class GastoService {
   }
 
   obtenerGastos(filtro: string = '') {
-    if (filtro.trim() === '') return this.gastos;
+    const gastos = this.authService.esAdmin()
+      ? this.gastos
+      : this.gastos.filter(g => g.usuarioId ===
+  this.authService.usuarioActivo!.id);
+
+    if (filtro.trim() === '') return gastos;
     const f = filtro.toLowerCase();
-    return this.gastos.filter(g =>
+    return gastos.filter(g =>
       g.concepto.toLowerCase().includes(f) ||
       g.descripcion.toLowerCase().includes(f)
     );
