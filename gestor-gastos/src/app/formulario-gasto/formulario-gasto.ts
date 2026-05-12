@@ -149,6 +149,7 @@ export class FormularioGastoComponent implements OnInit {
       notas: valores.notas
     };
 
+    
     if (this.modoEdicion) {
 
       this.gastoService.editarGasto(gasto);
