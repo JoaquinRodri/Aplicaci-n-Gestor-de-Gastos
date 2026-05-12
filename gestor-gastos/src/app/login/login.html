@@ -8,38 +8,111 @@
     }
   </h2>
 
-  <!-- Input nombre -->
-  <input
-    type="text"
-    placeholder="Nombre de usuario"
-    [(ngModel)]="nombre"
-  />
+  <!-- FORMULARIO LOGIN -->
+  @if (!modoRegistro) {
 
-  <!-- Input contraseña -->
-  <input
-    type="password"
-    placeholder="Contraseña"
-    [(ngModel)]="password"
-  />
+    <form [formGroup]="formularioLogin">
 
-  <!-- Mensaje de error -->
-  @if (mensajeError) {
-    <p class="error">{{ mensajeError }}</p>
-  }
+      <!-- Nombre -->
+      <input
+        type="text"
+        placeholder="Nombre de usuario"
+        formControlName="nombre"
+      />
 
-  <!-- Botón principal -->
-  @if (modoRegistro) {
-    <button (click)="registro()">Crear cuenta</button>
-  } @else {
-    <button (click)="login()">Entrar</button>
-  }
+      @if (formularioLogin.get('nombre')?.errors?.['required'] && formularioLogin.get('nombre')?.touched) {
+        <p class="error">{{ ERRORES.general.requerido }}</p>
+      }
 
-  <!-- Enlaces para cambiar de modo -->
-  @if (modoRegistro) {
-    <p class="alternar" (click)="irALogin()">¿Ya tienes cuenta? Inicia sesión</p>
-  } @else {
+      @if (formularioLogin.get('nombre')?.errors?.['minlength'] && formularioLogin.get('nombre')?.touched) {
+        <p class="error">{{ ERRORES.nombre.minimo }}</p>
+      }
+
+      @if (formularioLogin.get('nombre')?.errors?.['maxlength'] && formularioLogin.get('nombre')?.touched) {
+        <p class="error">{{ ERRORES.nombre.maximo }}</p>
+      }
+
+      <!-- Password -->
+      <input
+        type="password"
+        placeholder="Contraseña"
+        formControlName="password"
+      />
+
+      @if (formularioLogin.get('password')?.errors?.['required'] && formularioLogin.get('password')?.touched) {
+        <p class="error">{{ ERRORES.general.requerido }}</p>
+      }
+
+      @if (formularioLogin.get('password')?.errors?.['pattern'] && formularioLogin.get('password')?.touched) {
+        <p class="error">{{ ERRORES.password.patron }}</p>
+      }
+
+      <!-- Error general -->
+      @if (mensajeError) {
+        <p class="error">{{ mensajeError }}</p>
+      }
+
+      <button (click)="login()">Entrar</button>
+
+    </form>
+
     <p class="alternar" (click)="irARegistro()">¿No tienes cuenta? Regístrate</p>
   }
 
+  <!-- FORMULARIO REGISTRO -->
+  @if (modoRegistro) {
+
+    <form [formGroup]="formularioRegistro">
+
+      <!-- Nombre -->
+      <input
+        type="text"
+        placeholder="Nombre de usuario"
+        formControlName="nombre"
+      />
+
+      @if (formularioRegistro.get('nombre')?.errors?.['required'] && formularioRegistro.get('nombre')?.touched) {
+        <p class="error">{{ ERRORES.general.requerido }}</p>
+      }
+
+      @if (formularioRegistro.get('nombre')?.errors?.['minlength'] && formularioRegistro.get('nombre')?.touched) {
+        <p class="error">{{ ERRORES.nombre.minimo }}</p>
+      }
+
+      @if (formularioRegistro.get('nombre')?.errors?.['maxlength'] && formularioRegistro.get('nombre')?.touched) {
+        <p class="error">{{ ERRORES.nombre.maximo }}</p>
+      }
+
+      @if (formularioRegistro.get('nombre')?.errors?.['pattern'] && formularioRegistro.get('nombre')?.touched) {
+        <p class="error">{{ ERRORES.nombre.sinEspacios }}</p>
+      }
+
+      <!-- Password -->
+      <input
+        type="password"
+        placeholder="Contraseña"
+        formControlName="password"
+      />
+
+      @if (formularioRegistro.get('password')?.errors?.['required'] && formularioRegistro.get('password')?.touched) {
+        <p class="error">{{ ERRORES.general.requerido }}</p>
+      }
+
+      @if (formularioRegistro.get('password')?.errors?.['pattern'] && formularioRegistro.get('password')?.touched) {
+        <p class="error">{{ ERRORES.password.patron }}</p>
+      }
+
+      <!-- Error general -->
+      @if (mensajeError) {
+        <p class="error">{{ mensajeError }}</p>
+      }
+
+      <button (click)="registro()">Crear cuenta</button>
+
+    </form>
+
+    <p class="alternar" (click)="irALogin()">¿Ya tienes cuenta? Inicia sesión</p>
+  }
+
 </div>
-<p>login works!</p>
+
