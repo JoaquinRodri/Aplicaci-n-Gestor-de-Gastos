@@ -1,8 +1,13 @@
 import { Component, inject } from '@angular/core';
+
 import { CommonModule } from '@angular/common';
+
 import { FormsModule } from '@angular/forms';
 
 import { GastoService } from '../services/gasto';
+
+import { Auth } from '../services/auth';
+
 import { Categoria } from '../models/gasto.model';
 
 @Component({
@@ -15,6 +20,8 @@ export class CategoriasComponent {
 
   gastoService = inject(GastoService);
 
+  authService = inject(Auth);
+
   mostrarFormulario = false;
 
   categoriaEditando: Categoria | null = null;
@@ -26,7 +33,13 @@ export class CategoriasComponent {
   };
 
   get categorias() {
+
     return this.gastoService.categorias;
+  }
+
+  get esAdmin() {
+
+    return this.authService.esAdmin();
   }
 
   abrirFormulario() {
@@ -56,7 +69,9 @@ export class CategoriasComponent {
   guardar() {
 
     if (!this.form.nombre.trim()) {
+
       alert('El nombre es obligatorio');
+
       return;
     }
 
