@@ -17,7 +17,7 @@ export class Auth {
   private readonly usuarioAdmin = {
     id: 0,
     nombre: 'admin',
-    password: 'admin',
+    password: 'Admin1',
     rol: 'admin' as 'admin'
   };
 
