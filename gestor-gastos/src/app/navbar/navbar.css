@@ -67,3 +67,26 @@ button {
 button:hover {
   background-color: #c0392b;
 }
+
+@media (max-width: 1303px) {
+  nav {
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 0.75rem 1rem;
+    justify-content: center;
+  }
+
+  nav a {
+    width: 80px;
+    font-size: 0.85rem;
+    padding: 6px 0;
+    margin-right: 0;
+  }
+
+  .user-info {
+    position: static;
+    width: 100%;
+    justify-content: center;
+    padding-bottom: 0.5rem;
+  }
+}
