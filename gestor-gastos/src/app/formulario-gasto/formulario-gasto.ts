@@ -128,7 +128,6 @@ export class FormularioGastoComponent implements OnInit {
       return;
     }
 
-<<<<<<< HEAD
     const valores = this.formularioGasto.value;
 
     const gasto: Gasto = {
@@ -150,12 +149,7 @@ export class FormularioGastoComponent implements OnInit {
       notas: valores.notas
     };
 
-=======
-    // Convierte el string de vuelta a Date antes de guardar
-    this.gasto.fecha = new Date(this.fechaString);
-    this.gasto.categoriaId = +this.gasto.categoriaId;
     
->>>>>>> feature-anton
     if (this.modoEdicion) {
 
       this.gastoService.editarGasto(gasto);
