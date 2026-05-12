@@ -68,6 +68,7 @@ export class FormularioGastoComponent implements OnInit {
 
     // Convierte el string de vuelta a Date antes de guardar
     this.gasto.fecha = new Date(this.fechaString);
+    this.gasto.categoriaId = +this.gasto.categoriaId;
 
     if (this.modoEdicion) {
       this.gastoService.editarGasto(this.gasto);
