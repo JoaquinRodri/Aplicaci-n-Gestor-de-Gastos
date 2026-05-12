@@ -1,46 +1,192 @@
-<div class="formulario">
-  <!-- El titulo cambia segun si es edicion o creacion -->
-  <h2>{{ modoEdicion ? 'Editar gasto' : 'Nuevo gasto' }}</h2>
+<form class="formulario" [formGroup]="formularioGasto">
+
+  <h2>
+    {{ modoEdicion ? 'Editar gasto' : 'Nuevo gasto' }}
+  </h2>
 
   <div class="campo">
+
     <label>Concepto *</label>
-    <input type="text" [(ngModel)]="gasto.concepto" placeholder="Ej: Compra">
+
+    <input
+      type="text"
+      formControlName="concepto"
+      placeholder="Ej: Compra"
+    >
+
+    @if (formularioGasto.get('concepto')?.errors?.['required'] &&
+         formularioGasto.get('concepto')?.touched) {
+
+      <p class="error">
+        {{ ERRORES.concepto.requerido }}
+      </p>
+    }
+
+    @if (formularioGasto.get('concepto')?.errors?.['minlength'] &&
+         formularioGasto.get('concepto')?.touched) {
+
+      <p class="error">
+        {{ ERRORES.concepto.minimo }}
+      </p>
+    }
+
+    @if (formularioGasto.get('concepto')?.errors?.['maxlength'] &&
+         formularioGasto.get('concepto')?.touched) {
+
+      <p class="error">
+        {{ ERRORES.concepto.maximo }}
+      </p>
+    }
+
   </div>
-<div class="campo">
+
+  <div class="campo">
+
     <label>Descripcion</label>
-    <input type="text" [(ngModel)]="gasto.descripcion" placeholder="Detalle">
+
+    <input
+      type="text"
+      formControlName="descripcion"
+      placeholder="Detalle"
+    >
+
+    @if (formularioGasto.get('descripcion')?.errors?.['minlength'] &&
+         formularioGasto.get('descripcion')?.touched) {
+
+      <p class="error">
+        {{ ERRORES.descripcion.minimo }}
+      </p>
+    }
+
   </div>
 
   <div class="campo">
+
     <label>Importe (euros) *</label>
-    <input type="number" [(ngModel)]="gasto.importe" min="0" step="0.01">
+
+    <input
+      type="number"
+      formControlName="importe"
+      min="0"
+      step="0.01"
+    >
+
+    @if (formularioGasto.get('importe')?.errors?.['required'] &&
+         formularioGasto.get('importe')?.touched) {
+
+      <p class="error">
+        {{ ERRORES.importe.requerido }}
+      </p>
+    }
+
+    @if (formularioGasto.get('importe')?.errors?.['min'] &&
+         formularioGasto.get('importe')?.touched) {
+
+      <p class="error">
+        {{ ERRORES.importe.minimo }}
+      </p>
+    }
+
+    @if (formularioGasto.get('importe')?.errors?.['max'] &&
+         formularioGasto.get('importe')?.touched) {
+
+      <p class="error">
+        {{ ERRORES.importe.maximo }}
+      </p>
+    }
+
   </div>
 
   <div class="campo">
+
     <label>Fecha *</label>
-    <input type="date" [(ngModel)]="fechaString">
+
+    <input
+      type="date"
+      formControlName="fecha"
+    >
+
+    @if (formularioGasto.get('fecha')?.errors?.['required'] &&
+         formularioGasto.get('fecha')?.touched) {
+
+      <p class="error">
+        {{ ERRORES.fecha.requerida }}
+      </p>
+    }
+
   </div>
 
   <div class="campo">
+
     <label>Categoria *</label>
-    <select [(ngModel)]="gasto.categoriaId">
-      <option [value]="0" disabled>Selecciona una categoria</option>
-      <!-- @for recorre las categorias para mostrarlas en el select -->
+
+    <select formControlName="categoriaId">
+
+      <option [value]="0" disabled>
+        Selecciona una categoria
+      </option>
+
       @for (cat of categorias; track cat.id) {
-        <option [value]="cat.id">{{ cat.nombre }}</option>
+
+        <option [value]="cat.id">
+          {{ cat.nombre }}
+        </option>
       }
+
     </select>
+
+    @if (formularioGasto.get('categoriaId')?.errors?.['required'] &&
+         formularioGasto.get('categoriaId')?.touched) {
+
+      <p class="error">
+        {{ ERRORES.categoria.requerida }}
+      </p>
+    }
+
+    @if (formularioGasto.get('categoriaId')?.errors?.['min'] &&
+         formularioGasto.get('categoriaId')?.touched) {
+
+      <p class="error">
+        {{ ERRORES.categoria.requerida }}
+      </p>
+    }
+
   </div>
 
   <div class="campo">
+
     <label>Notas</label>
-    <textarea [(ngModel)]="gasto.notas" rows="3" placeholder="Notas..."></textarea>
+
+    <textarea
+      formControlName="notas"
+      rows="3"
+      placeholder="Notas..."
+    ></textarea>
+
   </div>
 
   <div class="botones">
-    <button class="btn-guardar" (click)="guardar()">
+
+    <button
+      type="button"
+      class="btn-guardar"
+      (click)="guardar()"
+    >
+
       {{ modoEdicion ? 'Guardar cambios' : 'Anadir gasto' }}
+
     </button>
-    <button class="btn-cancelar" (click)="cancelar()">Cancelar</button>
+
+    <button
+      type="button"
+      class="btn-cancelar"
+      (click)="cancelar()"
+    >
+
+      Cancelar
+
+    </button>
+
   </div>
-</div>
+
+</form>
