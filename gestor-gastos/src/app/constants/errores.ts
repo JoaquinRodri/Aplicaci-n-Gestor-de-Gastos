@@ -1,45 +1,46 @@
 export const ERRORES = {
 
-  general: {
-    requerido: 'Este campo es obligatorio'
-  },
+    general: {
+        requerido: 'Este campo es obligatorio'
+    },
 
-  concepto: {
-    requerido: 'El concepto es obligatorio',
-    minimo: 'El concepto debe tener al menos 3 caracteres',
-    maximo: 'El concepto no puede superar los 50 caracteres'
-  },
+    nombre: {
+        minimo: 'El nombre debe tener al menos 3 caracteres',
+        maximo: 'El nombre debe tener menos de 20 caracteres',
+        sinEspacios: 'El nombre no puede contener espacios',
+        enUso: 'El nombre ya esta en uso'
+    },
 
-  descripcion: {
-    minimo: 'La descripcion debe tener al menos 5 caracteres'
-  },
+    password: {
+        minimo: 'La contraseña debe tener al menos 6 caracteres',
+        maximo: 'La contraseña no puede superar los 20 caracteres',
+        patron: 'La contraseña debe tener al menos una letra mayuscula y un numero'
+    },
 
-  importe: {
-    requerido: 'El importe es obligatorio',
-    minimo: 'El importe debe ser mayor que 0',
-    maximo: 'El importe no puede superar 99999'
-  },
+    credenciales: 'Usuario o contraseña incorrectos',
 
-  fecha: {
-    requerida: 'La fecha es obligatoria'
-  },
+    concepto: {
+        requerido: 'El concepto es obligatorio',
+        minimo: 'El concepto debe tener al menos 3 caracteres',
+        maximo: 'El concepto no puede superar los 50 caracteres'
+    },
 
-  categoria: {
-    requerida: 'Debes seleccionar una categoria'
-  },
+    descripcion: {
+        minimo: 'La descripcion debe tener al menos 5 caracteres',
+    },
 
-  nombre: {
-    minimo: 'El nombre debe tener al menos 3 caracteres',
-    maximo: 'El nombre no puede superar los 20 caracteres',
-    sinEspacios: 'El nombre no puede contener espacios',
-    enUso: 'Este nombre de usuario ya esta en uso'
-  },
+    importe: {
+        requerido: 'El importe es obligatorio',
+        minimo: 'El importe debe ser mayor que 0',
+        maximo: 'El importe no puede superar los 99999 euros'
+    },
 
-  password: {
-    minimo: 'La contrasena debe tener al menos 6 caracteres',
-    maximo: 'La contrasena no puede superar los 20 caracteres',
-    patron: 'La contrasena debe tener al menos una mayuscula y un numero'
-  },
+    fecha: {
+        requerida: 'La fecha es obligatoria',
+    },
 
-  credenciales: 'Usuario o contrasena incorrectos'
+    categoria: {
+        requerida: 'Debes seleccionar una categoria'
+    }
+
 };
