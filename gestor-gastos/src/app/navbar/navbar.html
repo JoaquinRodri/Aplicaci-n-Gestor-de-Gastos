@@ -3,4 +3,9 @@
   <a routerLink="/gastos" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Gastos</a>
   <a routerLink="/gastos/nuevo" routerLinkActive="active">Nuevo Gasto</a>
   <a routerLink="/categorias" routerLinkActive="active">Categorias</a>
+
+  <div class="user-info">
+    <span>{{ authService.usuarioActivo?.nombre }}</span>
+    <button (click)="logout()">Cerrar sesión</button>
+  </div>
 </nav>

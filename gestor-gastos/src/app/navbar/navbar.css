@@ -1,20 +1,69 @@
+/* Contenedor principal de la navegación */
 nav {
   display: flex;
-  gap: 1rem;
-  background-color: #2c3e50;
-  padding: 1rem;
+  align-items: center;
   justify-content: center;
-}
-
-nav a {
+  gap: 25px;
+  background-color: #2c3e50;
+  padding: 1rem 2rem;
   color: white;
-  text-decoration: none;
-  padding: 0.5rem 1rem;
-  border-radius: 4px;
-  border: 1px solid white;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  width: 100%;
 }
 
-nav a:hover, nav a.active {
-  background-color: white;
-  color: #2c3e50;
+/* Estilo para los enlaces */
+nav a {
+  color: #ecf0f1;
+  text-decoration: none;
+  margin-right: 20px;
+  font-weight: 500;
+  transition: color 0.3s;
+  border: 1px solid white;
+  border-radius: 12px;
+  width: 120px;
+  padding: 8px 0;
+  text-align: center;
+  font-weight: 600;
+}
+
+nav a:hover {
+  color: #9bd7ff;
+  border: 1px solid #9bd7ff;
+}
+
+/* Clase que Angular aplica automáticamente al enlace activo */
+.active {
+  color: #9bd7ff !important;
+  border: 1px solid #9bd7ff !important;
+}
+
+/* Contenedor de la parte derecha (Nombre + Botón) */
+.user-info {
+  position: absolute;
+  right: 100px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.user-info span {
+  font-size: 1.2rem;
+  font-style: italic;
+  color: #bdc3c7;
+}
+
+/* Botón de Logout */
+button {
+  background-color: #e74c3c;
+  color: white;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: #c0392b;
 }
